@@ -1,4 +1,4 @@
-# Messaging
+# Messaging Service
 
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 
@@ -36,16 +36,15 @@ Run all test suite and show coverage report:
 $ make test
 ```
 
-### API Documentation
+### Usage
 
-Schema:
+To start sending messages you can make a simple call using cURL, like the sample below:
 
-    {
-        "type": "object",
-        "properties": {
-            "sender": {}
-        }
-    }
+  ```shell
+  curl -X PUT -H "Content-type: application/json" -d '{"from": "21981527318", "to": "21980072800", "body": "Hello!"}' -i http://localhost:5000/api/v1/send_sms
+  ```
+
+#### API Details
 
 Method: PUT
 
@@ -61,16 +60,10 @@ Request example:
         "expiration_date": "2016-10-25T15:00"
     }
 
-Respomse Status Code: 201 CREATED
+Successful Respomse Status Code: 201 CREATED
 
 Response example:
 
     {
         "detail": "Message sent."
     }
-
-Sample call:
-
-  ```shell
-  curl -X PUT -H "Content-type: application/json" -d '{"from": "21981527318", "to": "21980072800", "body": "Hello!"}' -i http://localhost:5000/api/v1/send_sms
-  ```
