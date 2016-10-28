@@ -1,0 +1,3 @@
+[run]
+include = messaging/*
+omit = *migrations*
