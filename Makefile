@@ -17,7 +17,7 @@ test:
 
 
 #: runserver - Start the adapted development server.
-runserver:
+run:
 	python manage.py runserver
 
 
