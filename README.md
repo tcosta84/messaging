@@ -23,6 +23,26 @@ $ python manage.py db upgrade
 $ python manage.py runserver
 ```
 
+or
+
+```sh
+$ make install
+```
+
+### Development
+
+Run tests and show coverage report:
+
+```sh
+$ py.test --cov
+```
+
+or
+
+```sh
+$ make test
+```
+
 ### API Documentation
 
 Schema:
