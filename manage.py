@@ -9,7 +9,7 @@ app = create_app()
 
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
-manager.add_command('runserver', Server(threaded=True))
+manager.add_command('runserver', Server(threaded=True, host='0.0.0.0'))
 
 if __name__ == '__main__':
     manager.run()
