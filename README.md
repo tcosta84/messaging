@@ -67,3 +67,45 @@ Response example:
     {
         "detail": "Message sent."
     }
+
+Possible errors:
+
+400 BAD REQUEST
+
+- Content-type is not valid (expected "application/json");
+- Invalid JSON (ex: empty);
+- Validation erros;
+- Message size is greater than 160 chars;
+- Message is already expired (when "expiration_date" is provided)
+
+404 NOT FOUND
+
+- Mobile User not found (Operator API error)
+
+500 INTERNAL SERVER ERROR
+
+When an unexpected error happens (Service or Operator API error)
+
+**Example Response:**
+
+    {
+        "error": "Message not sent. Operator API response: "{description}""
+    }
+
+Operator API Errors:
+
+200 OK
+
+- Request is correct, no validation errors but failed due to the Operator API
+
+**Example Response:**
+
+    {
+        "error": "Message not sent. Operator API response: "{description}""
+    }
+
+**Possible Descriptions:**
+
+- 'Mobile User not found'
+- 'Validation exception'
+- 'Internal Server Error
