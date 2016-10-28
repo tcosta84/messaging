@@ -3,10 +3,6 @@ from marshmallow import Schema, fields
 from werkzeug.exceptions import BadRequest
 from flask import Blueprint, jsonify, request
 
-from messaging.extensions import db
-from messaging.repositories import MessageRepository
-from messaging.domains import Message
-from messaging.apiclients import OperatorAPI
 from messaging.services import SendMessageService, MessageTooLargeError, ExpiredMessageError, OperatorAPIError
 
 blueprint = Blueprint('api', __name__)
@@ -55,27 +51,6 @@ def send_sms():
         }
         error_msg = 'Message not sent. Operator API response: "{0}"'.format(api_resp[e.status_code])
         return jsonify(error=error_msg), 200
-
-    # repo = MessageRepository()
-    # apiclient = OperatorAPI()
-    #
-    # msg = Message(sender, receiver, body, expiration_date)
-    # if msg.is_large():
-    #     return jsonify(error='Message size is greater than 160 chars.'), 400
-    #
-    # if msg.is_expired():
-    #     return jsonify(error='Message is already expired.'), 400
-    #
-    # msg = repo.create(msg.sender, msg.receiver, msg.body, msg.expiration_date)
-    #
-    # resp = apiclient.send_sms(msg.id, sender, receiver, body)
-    #
-    # repo.update_status_code(msg.id, resp.status_code)
-    #
-    #
-    # if resp.status_code != 201:
-    #     error_msg = 'Message not sent. Operator API response: "{0}"'.format(api_resp[resp.status_code])
-    #     return jsonify(error=error_msg), 200
 
     return jsonify(detail='Message sent.'), 201
 
