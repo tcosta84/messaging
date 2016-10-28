@@ -1,5 +1,7 @@
 import json
 
+from messaging.services import OperatorAPIError
+
 
 def test_should_send(client, session, mocker):
     operator_api_mock = mocker.patch('messaging.apis.OperatorAPI')
@@ -32,8 +34,8 @@ def test_should_not_send_when_message_is_already_expired(client, session):
 
 
 def test_response_when_external_service_responds_with_error_code(client, session, mocker):
-    operator_api_mock = mocker.patch('messaging.apis.OperatorAPI')
-    operator_api_mock.return_value.send_sms.return_value.status_code = 404
+    service = mocker.patch('messaging.apis.SendMessageService')
+    service.return_value.send.side_effect = OperatorAPIError(status_code=404)
 
     data = {'from': '21981527318', 'to': '21980072800', 'body': 'Hello!'}
 
@@ -50,6 +52,15 @@ def test_should_not_send_when_contenttype_is_not_set_or_is_invalid(client):
 
     assert resp.status_code == 400
     assert resp.json['error'] == 'Content-type is not valid.'
+
+
+def test_should_not_send_when_json_is_invalid(client, session):
+    data = ''
+
+    resp = client.put('/api/v1/send_sms', data=data, content_type='application/json')
+
+    assert resp.status_code == 400
+    assert resp.json['error'] == 'Invalid JSON.'
 
 
 def test_validation_error(client, session):
