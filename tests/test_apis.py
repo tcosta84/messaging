@@ -60,7 +60,7 @@ def test_should_not_send_when_json_is_invalid(client, session):
     assert resp.json['error'] == 'Invalid JSON.'
 
 
-def test_validation_error(client, session):
+def test_should_not_send_when_request_has_validation_errors(client, session):
     data = {'id': 1}
 
     resp = client.put('/api/v1/send_sms', data=json.dumps(data), content_type='application/json')
