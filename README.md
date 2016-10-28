@@ -14,11 +14,12 @@ You can't:
 
 Messaging requires [Python](https://python.org/) v3.5+ to run.
 
-Create a virtualenv, install the dependencies and start the server.
+Install the dependencies, create database and start the server.
 
 ```sh
-$ cd messaging-service
+$ cd messaging
 $ pip install -r requirements.txt
+$ python manage.py db upgrade
 $ python manage.py runserver
 ```
 
@@ -58,7 +59,7 @@ Response example:
 Sample call:
 
   ```shell
-  curl -X POST -H "Content-type: application/json" -d '{id: 1090, "from": "21981527318", "to": "21980072800", "body": "Hello!"}' -i http://localhost:5000/api/v1/send_sms
+  curl -X PUT -H "Content-type: application/json" -d '{"from": "21981527318", "to": "21980072800", "body": "Hello!"}' -i http://localhost:5000/api/v1/send_sms
   ```
 
 ### Docker
@@ -82,4 +83,3 @@ Verify the deployment by navigating to your server address in your preferred bro
 
 ```sh
 127.0.0.1:5000
-```
