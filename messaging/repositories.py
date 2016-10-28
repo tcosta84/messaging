@@ -11,11 +11,6 @@ class MessageRepository(object):
         self.db.session.commit()
         return message
 
-    def save(self, message):
-        self.db.session.add(message)
-        self.db.session.commit()
-        return message
-
     def update_status_code(self, id, status_code):
         message = Message.query.get(id)
         message.status_code = status_code
