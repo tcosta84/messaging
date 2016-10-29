@@ -21,6 +21,16 @@ run:
 	python manage.py runserver
 
 
+#: clean - Remove cache and compiled files
+clean:
+	find . -name "__pycache__" -type d -exec rm -rf {} +
+	find . -name "*.pyc" -exec rm -rf {} +
+
+
+dropdb:
+	find . -name "*.sqlite3" -exec rm -rf {} +
+
+
 python-requirements:
 	pip install -r requirements.txt
 
