@@ -1,6 +1,10 @@
 import datetime
 import pytest
-from unittest import mock
+
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from messaging.services import MessageTooLargeError, ExpiredMessageError, SendMessageService
 
