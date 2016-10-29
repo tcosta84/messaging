@@ -4,6 +4,7 @@ from messaging.services import OperatorAPIError
 
 
 def test_should_send(client, session, mocker):
+    mocker.patch('messaging.apis.SendMessageService')
     data = {'from': '21981527318', 'to': '21980072800', 'body': 'Hello!'}
 
     resp = client.put('/api/v1/send_sms', data=json.dumps(data), content_type='application/json')
