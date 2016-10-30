@@ -1,7 +1,5 @@
 # Messaging Service
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
 Messaging is a microservice that let your application send short messages (SMS).
 
 You can:
